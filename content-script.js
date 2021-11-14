@@ -52,7 +52,9 @@ function getFeatureByName(name) {
 }
 
 function getTotalArea() {
-  const areaString = getFeatureByName("Suprafață totală");
+  const areaString =
+    getFeatureByName("Suprafață locativă") ||
+    getFeatureByName("Suprafață totală");
   const match = areaString?.match(/^(?<area>\d+) m²$/);
 
   if (!match) return null;
