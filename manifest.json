@@ -1,0 +1,13 @@
+{
+  "name": "999.md addons",
+  "description": "Addons for a better experience browsing 999.md (Romanian lang)",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["https://999.md/ro/*"],
+      "js": ["jquery-3.6.0.min.js", "content-script.js"]
+    }
+  ]
+}
