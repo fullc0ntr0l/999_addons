@@ -4,12 +4,13 @@ function trim(text) {
 
 function getCurrentCategory() {
   const breadcrumbsCategoryLink = $("#m__breadcrumbs a").last()[0];
-
-  if (!breadcrumbsCategoryLink) return null;
-
-  return breadcrumbsCategoryLink.href.match(
+  const match = breadcrumbsCategoryLink?.href?.match(
     /^https:\/\/999.md\/ro\/list\/(?<category>.+)/
-  ).groups.category;
+  );
+
+  if (!match) return null;
+
+  return match.groups.category;
 }
 
 function getListedPrice() {
@@ -33,10 +34,11 @@ function getListedPrice() {
 
 function getAdvertType() {
   const text = $(".adPage__aside__stats__type").text();
+  const match = text?.match(/^Tipul: (?<type>.+)$/);
 
-  if (!text) return null;
+  if (!match) return null;
 
-  return text.match(/^Tipul: (?<type>.+)$/).groups.type;
+  return match.groups.type;
 }
 
 function getFeatureByName(name) {
@@ -51,10 +53,11 @@ function getFeatureByName(name) {
 
 function getTotalArea() {
   const areaString = getFeatureByName("Suprafață totală");
+  const match = areaString?.match(/^(?<area>\d+) m²$/);
 
-  if (!areaString) return null;
+  if (!match) return null;
 
-  const area = areaString.match(/^(?<area>\d+) m²$/).groups.area;
+  const area = match.groups.area;
 
   return parseInt(area);
 }
