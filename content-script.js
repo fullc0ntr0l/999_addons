@@ -51,10 +51,8 @@ function getFeatureByName(name) {
   return trim(featureValue);
 }
 
-function getTotalArea() {
-  const areaString =
-    getFeatureByName("Suprafață locativă") ||
-    getFeatureByName("Suprafață totală");
+function getTotalArea(featureName) {
+  const areaString = getFeatureByName(featureName);
   const match = areaString?.match(/^(?<area>\d+) m²$/);
 
   if (!match) return null;
@@ -72,7 +70,8 @@ window.onload = function () {
   if (getCurrentCategory() === "real-estate/apartments-and-rooms") {
     if (getAdvertType() === "Vând") {
       const listedPrice = getListedPrice();
-      const totalArea = getTotalArea();
+      const totalArea =
+        getTotalArea("Suprafață locativă") || getTotalArea("Suprafață totală");
 
       if (listedPrice && totalArea) {
         const pricePerm2 = calcPricePerSquareMeter(
